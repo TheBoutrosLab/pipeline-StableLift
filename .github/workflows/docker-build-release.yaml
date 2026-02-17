@@ -30,4 +30,4 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: uclahs-cds/tool-Docker-action@v2
+      - uses: TheBoutrosLab/tool-Docker-action@v2

@@ -112,6 +112,18 @@ ucla_cds:
   default: false
   help: 'If set, overwrite default memory and CPU values by UCLA cluster-specific configs'
 
+apptainer_library:
+  type: 'Path'
+  mode: 'r'
+  required: false
+  help: 'Absolute path to Apptainer library directory'
+
+apptainer_cache:
+  type: 'Path'
+  mode: 'w'
+  required: false
+  help: 'Absolute path to Apptainer cache directory'
+
 # Internal parameters
 src_fasta_id:
   type: 'String'
