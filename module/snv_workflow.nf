@@ -71,7 +71,7 @@ process split_vcf_for_feature_extraction {
             mv "\${file}~" "\${file}"
         done
     else
-        ln -s \${vcf} "split_vcf/${sample_id}.vcf"
+        cp \${vcf} "split_vcf/${sample_id}.vcf"
     fi
     """
 }
