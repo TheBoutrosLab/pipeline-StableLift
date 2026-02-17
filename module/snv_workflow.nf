@@ -78,7 +78,7 @@ process split_vcf_for_feature_extraction {
 
 process extract_VCF_features_StableLift {
     container params.docker_image_stablelift
-    containerOptions "-v ${moduleDir}:${moduleDir}"
+    containerOptions "${params.container_mount_flag} ${moduleDir}:${moduleDir}"
 
     cpus { params.getOrDefault('extract_features_cpus', 4) }
 

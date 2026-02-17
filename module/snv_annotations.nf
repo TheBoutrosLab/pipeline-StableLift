@@ -2,7 +2,7 @@ include { compress_and_index_vcf; compress_and_index_tsv } from './utils.nf'
 
 process add_genotype_field {
     container params.docker_image_stablelift
-    containerOptions "-v ${moduleDir}:${moduleDir}"
+    containerOptions "${params.container_mount_flag} ${moduleDir}:${moduleDir}"
 
     publishDir path: "${params.output_dir_base}/intermediate/${task.process.replace(':', '/')}",
         pattern: "output.vcf",

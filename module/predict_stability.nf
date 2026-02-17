@@ -2,7 +2,7 @@ include { compress_and_index_tsv } from './utils.nf'
 
 process predict_stability_StableLift {
     container params.docker_image_stablelift
-    containerOptions "-v ${moduleDir}:${moduleDir}"
+    containerOptions "${params.container_mount_flag} ${moduleDir}:${moduleDir}"
 
     input:
     tuple val(sample_id), path(features_rds)
