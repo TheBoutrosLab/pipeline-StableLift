@@ -1,4 +1,4 @@
-[![GitHub release](https://img.shields.io/github/v/release/uclahs-cds/pipeline-StableLift)](https://github.com/uclahs-cds/pipeline-StableLift/actions/workflows/prepare-release.yaml)
+[![GitHub release](https://img.shields.io/github/v/release/theboutroslab/pipeline-StableLift)](https://github.com/theboutroslab/pipeline-StableLift/actions/workflows/prepare-release.yaml)
 
 # StableLift
 
@@ -47,8 +47,8 @@ Supported variant callers:
 
 ## How To Run
 
-1. Download and extract resource bundle and source code from [latest release](https://github.com/uclahs-cds/pipeline-StableLift/releases).
-2. Download [pre-trained model](https://github.com/uclahs-cds/pipeline-StableLift/releases) corresponding to variant caller and conversion direction.
+1. Download and extract resource bundle and source code from [latest release](https://github.com/theboutroslab/pipeline-StableLift/releases).
+2. Download [pre-trained model](https://github.com/theboutroslab/pipeline-StableLift/releases) corresponding to variant caller and conversion direction.
 3. Copy [`./config/template.config`](./config/template.config) (e.g. project.config) and fill in all required parameters.
 4. Copy [`./input/template.yaml`](./input/template.yaml) (e.g. project.yaml) and update with input VCF ID and path.
 5. Run the pipeline using [Nextflow](https://www.nextflow.io/docs/latest/install.html#install-nextflow) `nextflow run -c project.config -params-file project.yaml main.nf`.
@@ -101,7 +101,7 @@ input:
 | `liftover_direction`        | string | Conversion direction: [GRCh37ToGRCh38, GRCh38ToGRCh37].                                                                                            |
 | `fasta_ref_37`              | path   | Path to the GRCh37 reference sequence (FASTA).                                                                                                     |
 | `fasta_ref_38`              | path   | Path to the GRCh38 reference sequence (FASTA).                                                                                                     |
-| `resource_bundle_path`      | path   | Path to unpacked [resource-bundle.zip](https://github.com/uclahs-cds/pipeline-StableLift/releases).            |
+| `resource_bundle_path`      | path   | Path to unpacked [resource-bundle.zip](https://github.com/theboutroslab/pipeline-StableLift/releases).            |
 | `funcotator_data_source`    | path   | Path to [Funcotator data source](https://gatk.broadinstitute.org/hc/en-us/articles/360050815792-FuncotatorDataSourceDownloader) directory containing dbSNP, GENCODE and HGNC sources (required for SNV annotation).|
 
 | Optional Parameter          | Type                                                                                      | Default                      | Description                                                                                                                                                                                                                                                                                                                                                                           |
@@ -136,7 +136,7 @@ input:
 
 ### Test Dataset
 
-10 whole genomes from [The Cancer Genome Atlas (TCGA-SARC)](https://portal.gdc.cancer.gov/projects/TCGA-SARC) were used to test pipeline outputs and validate model performance. All data was processed using [standardized Nextflow pipelines](https://github.com/uclahs-cds/metapipeline-DNA). Somatic VCFs from GRCh37 and GRCh38 alignments are available for the four supported sSNV callers and DELLY2 sSV as [release attachments](https://github.com/uclahs-cds/pipeline-StableLift/releases).
+10 whole genomes from [The Cancer Genome Atlas (TCGA-SARC)](https://portal.gdc.cancer.gov/projects/TCGA-SARC) were used to test pipeline outputs and validate model performance. All data was processed using [standardized Nextflow pipelines](https://github.com/theboutroslab/metapipeline-DNA). Somatic VCFs from GRCh37 and GRCh38 alignments are available for the four supported sSNV callers and DELLY2 sSV as [release attachments](https://github.com/theboutroslab/pipeline-StableLift/releases).
 
 | Donor ID       | Normal Sample ID          | Tumour Sample ID          |
 |----------------|---------------------------|---------------------------|
@@ -157,21 +157,21 @@ input:
 
 1. [StableLift: Optimized Germline and Somatic Variant Detection Across Genome Builds](https://www.biorxiv.org/content/10.1101/2024.10.31.621401v1)
 2. [Metapipeline-DNA: A Comprehensive Germline & Somatic Genomics Nextflow Pipeline](https://www.biorxiv.org/content/10.1101/2024.09.04.611267v3)
-3. [uclahs-cds/metapipeline-DNA](https://github.com/uclahs-cds/metapipeline-DNA)
+3. [uclahs-cds/metapipeline-DNA](https://github.com/theboutroslab/metapipeline-DNA)
 
 ---
 
 ## Discussions
 
-- [Issue tracker](https://github.com/uclahs-cds/pipeline-StableLift/issues) to report errors and enhancement ideas.
-- Discussions can take place in [pipeline-StableLift Discussions](https://github.com/uclahs-cds/pipeline-StableLift/discussions)
-- [pipeline-StableLift pull requests](https://github.com/uclahs-cds/pipeline-StableLift/pulls) are also open for discussion
+- [Issue tracker](https://github.com/theboutroslab/pipeline-StableLift/issues) to report errors and enhancement ideas.
+- Discussions can take place in [pipeline-StableLift Discussions](https://github.com/theboutroslab/pipeline-StableLift/discussions)
+- [pipeline-StableLift pull requests](https://github.com/theboutroslab/pipeline-StableLift/pulls) are also open for discussion
 
 ---
 
 ## Contributors
 
-Please see list of [Contributors](https://github.com/uclahs-cds/pipeline-StableLift/graphs/contributors) at GitHub.
+Please see list of [Contributors](https://github.com/theboutroslab/pipeline-StableLift/graphs/contributors) at GitHub.
 
 ---
 
