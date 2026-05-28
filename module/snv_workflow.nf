@@ -2,6 +2,7 @@ include { workflow_annotate_snvs } from './snv_annotations.nf'
 
 process run_liftover_BCFtools {
     container params.docker_image_bcftools
+    containerOptions "${params.platform_set}"
 
     publishDir path: "${params.output_dir_base}/intermediate/${task.process.replace(':', '/')}",
         pattern: "{reject,liftover}.vcf.gz{,.tbi}",

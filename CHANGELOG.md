@@ -17,6 +17,11 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Changed
 
 - Use `TheBoutrosLab` submodules
+- BCFtools-score `v1.22_score-1.22-20250819`
+- BEDtools `v2.31.1`
+- GATK `v4.6.2.0`
+- PipeVal `v5.2.0`
+- SAMtools `v1.23`
 
 ## [1.1.0] - 2024-10-17
 
