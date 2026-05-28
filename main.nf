@@ -123,8 +123,8 @@ workflow {
     pipeval_meta.combine(
         vcf_with_index
             .flatMap { sample ->
-                ["sample_id": params.sample_id, "type": "vcf", "file": sample.vcf],
-                ["sample_id": params.sample_id, "type": "index", "file": sample.index]
+                [["sample_id": params.sample_id, "type": "vcf", "file": sample.vcf],
+                ["sample_id": params.sample_id, "type": "index", "file": sample.index]]
             }
     ).map { meta, sample_info ->
         [meta + sample_info, sample_info.file]
