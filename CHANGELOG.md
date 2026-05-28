@@ -23,6 +23,10 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - PipeVal `v5.2.0`
 - SAMtools `v1.23`
 
+### Removed
+
+- Usage of `addParams`
+
 ## [1.1.0] - 2024-10-17
 
 ### Added
