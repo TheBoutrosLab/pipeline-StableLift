@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Added
 
 - Add containerization profiles
+- Option for expanding exit codes on a process level to trigger retry
 
 ### Changed
 
