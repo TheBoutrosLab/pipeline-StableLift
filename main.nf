@@ -3,12 +3,7 @@
 nextflow.enable.dsl=2
 
 // Include processes and workflows here
-include { run_validate_PipeVal_with_metadata } from './external/pipeline-Nextflow-module/modules/PipeVal/validate/main.nf' addParams(
-    options: [
-        docker_image_version: params.pipeval_version,
-        main_process: "./" //Save logs in <log_dir>/process-log/run_validate_PipeVal
-    ]
-)
+include { run_validate_PipeVal } from './external/pipeline-Nextflow-module/modules/PipeVal/validate/main.nf'
 
 include { workflow_extract_sv_annotations } from './module/sv_workflow.nf'
 include { workflow_extract_snv_annotations } from './module/snv_workflow.nf'
@@ -111,6 +106,11 @@ Channel
 
 // Main workflow here
 workflow {
+    pipeval_meta = Channel.value([
+        "log_output_dir": "${params.log_output_dir}/process-log",
+        "docker_image": params.docker_image_pipeval
+    ])
+
     Channel.of ([
             vcf: params.input.vcf,
             index: indexFile(params.input.vcf),
@@ -120,24 +120,26 @@ workflow {
     // The values of vcf_with_index are maps with keys vcf, index, and sample_id.
 
     // Run the input VCF and TBI files through PipeVal
-    vcf_with_index
-        .flatMap { sample ->
-            [
-                [sample.vcf, [[sample_id: sample.sample_id], "vcf"]],
-                [sample.index, [[sample_id: sample.sample_id], "index"]]
-            ]
-        } | run_validate_PipeVal_with_metadata
+    pipeval_meta.combine(
+        vcf_with_index
+            .flatMap { sample ->
+                ["sample_id": params.sample_id, "type": "vcf", "file": sample.vcf],
+                ["sample_id": params.sample_id, "type": "index", "file": sample.index]
+            }
+    ).map { meta, sample_info ->
+        [meta + sample_info, sample_info.file]
+    } | run_validate_PipeVal
 
     // Save the validation result
-    run_validate_PipeVal_with_metadata.out.validation_result
+    run_validate_PipeVal.out.validation_result
         .collectFile(
             name: 'input_validation.txt',
             newLine: true,
             storeDir: "${params.output_dir_base}/validation"
         )
 
-    run_validate_PipeVal_with_metadata.out.validated_file
-        .map { filename, metadata -> [metadata[0].sample_id, metadata[0] + [(metadata[1]): filename]] }
+    run_validate_PipeVal.out.validated_file
+        .map { metadata, filename -> [metadata.sample_id, metadata + [(metadata.type): filename]] }
         .groupTuple()
         .map { it[1].inject([:]) { result, i -> result + i } }
         .tap { validated_vcf_with_index }
