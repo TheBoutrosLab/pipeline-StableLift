@@ -9,6 +9,7 @@
     - [2. Annotate Variants](#2-annotate-variants)
     - [3. Predict Variant Stability](#3-predict-variant-stability)
   - [Inputs](#inputs)
+  - [Profiles](#profiles)
   - [Outputs](#outputs)
   - [Testing and Validation](#testing-and-validation)
     - [Test Dataset](#test-dataset)
@@ -118,6 +119,20 @@ input:
 | `dataset_id`                | string                                                                                    | `""`                         | Dataset ID to be used as output filename prefix.                                                                                                                                                                                                                                                                                                                                      |
 | `blcds_registered_dataset`  | boolean                                                                                   | false                        | Set to true when using BLCDS folder structure; use false for now.                                                                                                                                                                                                                                                                                                                     |
 | `ucla_cds`                  | boolean                                                                                   | false                        | If set, overwrite default memory and CPU values by UCLA cluster-specific configs.                                                                                                                                                                                                                                                                                                     |
+| `apptainer_library`         | path                                                                                      | `""`                         | Path to readable Apptainer library directory containing any existing Apptainer images.                                                                                                                                                                                                                                                                                                |
+| `apptainer_cache`           | path                                                                                      | `""`                         | Path to writable Apptainer cache directory where images will be cached.                                                                                                                                                                                                                                                                                                               |
+| `singularity_library`       | path                                                                                      | `""`                         | Path to readable Singularity library directory containing any existing Singularity images.                                                                                                                                                                                                                                                                                            |
+| `singularity_cache`         | path                                                                                      | `""`                         | Path to writable Singularity cache directory where images will be cached.                                                                                                                                                                                                                                                                                                             |
+
+---
+
+## Profiles
+
+Profiles can be selected to control which containerization system will be used. Profile selection can be passed to the Nextflow run command using `-profile`. Available profiles:
+
+- `docker` - Use Docker as the containerization system
+- `apptainer` - Use Apptainer as the containerization system
+- `singularity` - Use Singularity as the containerization system
 
 ---
 

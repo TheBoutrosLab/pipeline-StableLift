@@ -124,6 +124,18 @@ apptainer_cache:
   required: false
   help: 'Absolute path to Apptainer cache directory'
 
+singularity_library:
+  type: 'Path'
+  mode: 'r'
+  required: false
+  help: 'Absolute path to Singularity library directory'
+
+singularity_cache:
+  type: 'Path'
+  mode: 'w'
+  required: false
+  help: 'Absolute path to Singularity cache directory'
+
 # Internal parameters
 src_fasta_id:
   type: 'String'
