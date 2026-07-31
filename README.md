@@ -196,7 +196,8 @@ pipeline-StableLift is licensed under the GNU General Public License version 2. 
 
 StableLift is a machine learning approach designed to predict variant stability across reference genome builds, supplementing LiftOver coordinate conversion to increase the portability of variant calls.
 
-Copyright (C) 2024 University of California Los Angeles ("Boutros Lab") All rights reserved.
+Copyright (C) 2024-2025 University of California Los Angeles ("Boutros Lab")
+Copyright (C) 2026 Sanford Burnham Prebys Medical Discovery Institute ("Boutros Lab")
 
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 
