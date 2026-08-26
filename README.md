@@ -144,6 +144,8 @@ Profiles can be selected to control which containerization system will be used. 
 | `*_StableLift-${target_build}.vcf.gz.tbi` | Output VCF tabix index. |
 | `*_StableLift-${target_build}_filtered.vcf.gz` | Filtered output VCF with predicted "Unstable" variants removed. |
 | `*_StableLift-${target_build}_filtered.vcf.gz.tbi` | Filtered output VCF tabix index. |
+| `StableLift-${sample_id}_original-annotated.vcf.gz` | Input VCF with annotations. |
+| `StableLift-${sample_id}_original-annotated.vcf.gz.tbi` | Input VCF with annotations tabix index. |
 
 ---
 
