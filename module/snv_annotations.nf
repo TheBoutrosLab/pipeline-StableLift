@@ -148,11 +148,10 @@ process extract_TrinucleotideContext_BEDTools {
 process annotate_trinucleotide_BCFtools {
     container params.docker_image_bcftools
 
-    publishDir path: "${params.output_dir_base}/intermediate/${task.process.replace(':', '/')}",
-        pattern: "output.vcf.gz",
+    publishDir path: "${params.output_dir_base}/output",
+        pattern: "output.vcf.gz{,.tbi}",
         mode: "copy",
-        enabled: params.save_intermediate_files,
-        saveAs: { "Trinucleotide-annotated-${sample_id}.vcf.gz" }
+        saveAs: { "StableLift-${sample_id}_original-annotated${it.replace('output','')}" }
 
     input:
     tuple val(sample_id),
