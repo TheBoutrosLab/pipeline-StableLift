@@ -185,4 +185,8 @@ workflow {
         Channel.value(params.variant_caller),
         Channel.value(params.dest_fasta_id)
     )
+
+    workflow.onComplete = {
+        WorkflowFinalizer.completeWorkflow(workflow, params);
+    }
 }
