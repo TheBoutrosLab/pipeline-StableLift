@@ -48,6 +48,8 @@ Supported variant callers:
 
 ## How To Run
 
+**Requirements**: Currently supported Nextflow versions: `25.10.5` (requires Java 17 or later)
+
 1. Download and extract resource bundle and source code from [latest release](https://github.com/theboutroslab/pipeline-StableLift/releases).
 2. Download [pre-trained model](https://github.com/theboutroslab/pipeline-StableLift/releases) corresponding to variant caller and conversion direction.
 3. Copy [`./config/template.config`](./config/template.config) (e.g. project.config) and fill in all required parameters.
