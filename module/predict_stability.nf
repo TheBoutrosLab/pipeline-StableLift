@@ -2,7 +2,7 @@ include { compress_and_index_tsv } from './utils.nf'
 
 process predict_stability_StableLift {
     container params.docker_image_stablelift
-    containerOptions "${params.container_mount_flag} ${moduleDir}:${moduleDir}"
+    ext containerOptions: "${params.container_mount_flag} ${moduleDir}:${moduleDir}"
 
     input:
     tuple val(sample_id), path(features_rds)
@@ -38,7 +38,8 @@ process run_apply_stability_annotations {
     publishDir path: "${params.output_dir_base}/output",
         pattern: "StableLift-${dest_fasta_id}{,_filtered}.vcf.gz{,.tbi}",
         mode: "copy",
-        saveAs: { "${sample_id}_${variant_caller}_${it}" }
+        saveAs: { "${sample_id}_${variant_caller}_${it}" },
+        failOnError: false
 
     input:
     tuple val(sample_id),

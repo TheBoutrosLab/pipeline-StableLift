@@ -2,13 +2,14 @@ include { compress_and_index_vcf; compress_and_index_tsv } from './utils.nf'
 
 process add_genotype_field {
     container params.docker_image_stablelift
-    containerOptions "${params.container_mount_flag} ${moduleDir}:${moduleDir}"
+    ext containerOptions: "${params.container_mount_flag} ${moduleDir}:${moduleDir}"
 
     publishDir path: "${params.output_dir_base}/intermediate/${task.process.replace(':', '/')}",
         pattern: "output.vcf",
         mode: "copy",
         enabled: params.save_intermediate_files,
-        saveAs: { "${sample_id}_add-GT.vcf" }
+        saveAs: { "${sample_id}_add-GT.vcf" },
+        failOnError: false
 
     input:
         tuple val(sample_id), path(vcf), path(index)
@@ -37,7 +38,8 @@ process run_Funcotator_GATK {
         pattern: "output.vcf.gz",
         mode: "copy",
         enabled: params.save_intermediate_files,
-        saveAs: { "Funcotator-${sample_id}-${dest_fasta_id}.vcf.gz" }
+        saveAs: { "Funcotator-${sample_id}-${dest_fasta_id}.vcf.gz" },
+        failOnError: false
 
     input:
         tuple val(sample_id),
@@ -75,7 +77,8 @@ process annotate_RepeatMasker_BCFtools {
         pattern: "output.vcf.gz",
         mode: "copy",
         enabled: params.save_intermediate_files,
-        saveAs: { "RepeatMasker-${sample_id}.vcf.gz" }
+        saveAs: { "RepeatMasker-${sample_id}.vcf.gz" },
+        failOnError: false
 
     input:
     tuple val(sample_id), path(vcf, stageAs: 'inputs/*')
@@ -108,7 +111,8 @@ process extract_TrinucleotideContext_BEDTools {
         pattern: "output.{bed,tsv}",
         mode: "copy",
         enabled: params.save_intermediate_files,
-        saveAs: { "Trinucleotide-${sample_id}-${dest_fasta_id}.${file(it).getExtension()}" }
+        saveAs: { "Trinucleotide-${sample_id}-${dest_fasta_id}.${file(it).getExtension()}" },
+        failOnError: false
 
     input:
     tuple val(sample_id), path(vcf)
@@ -151,7 +155,8 @@ process annotate_trinucleotide_BCFtools {
     publishDir path: "${params.output_dir_base}/output",
         pattern: "output.vcf.gz{,.tbi}",
         mode: "copy",
-        saveAs: { "StableLift-${sample_id}_original-annotated${it.replace('output','')}" }
+        saveAs: { "StableLift-${sample_id}_original-annotated${it.replace('output','')}" },
+        failOnError: false
 
     input:
     tuple val(sample_id),

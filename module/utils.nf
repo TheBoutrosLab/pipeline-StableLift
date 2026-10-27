@@ -5,7 +5,8 @@ process compress_and_index_vcf {
         pattern: "output.vcf.gz{,.tbi}",
         mode: "copy",
         enabled: params.save_intermediate_files,
-        saveAs: { "${sample_id}${file(it).getName().replace(file(it).getSimpleName(), "")}" }
+        saveAs: { "${sample_id}${file(it).getName().replace(file(it).getSimpleName(), "")}" },
+        failOnError: false
 
     input:
     tuple val(sample_id), path(input_vcf)
@@ -36,7 +37,8 @@ process compress_and_index_tsv {
         pattern: "output.tsv.gz{,.tbi}",
         mode: "copy",
         enabled: params.save_intermediate_files,
-        saveAs: { "${sample_id}${file(it).getName().replace(file(it).getSimpleName(), "")}" }
+        saveAs: { "${sample_id}${file(it).getName().replace(file(it).getSimpleName(), "")}" },
+        failOnError: false
 
     input:
     tuple val(sample_id), path(input_tsv)
