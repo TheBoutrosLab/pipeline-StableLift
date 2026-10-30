@@ -1,12 +1,13 @@
 process liftover_annotate_SV_StableLift {
     container params.docker_image_stablelift
-    containerOptions "${params.container_mount_flag} ${moduleDir}:${moduleDir}"
+    ext containerOptions: "${params.container_mount_flag} ${moduleDir}:${moduleDir}"
 
     publishDir path: "${params.output_dir_base}/intermediate/${task.process.replace(':', '/')}",
         pattern: "liftover.{vcf.gz,Rds}",
         mode: "copy",
         enabled: params.save_intermediate_files,
-        saveAs: { "LiftOver-${sample_id}.vcf.gz" }
+        saveAs: { "LiftOver-${sample_id}.vcf.gz" },
+        failOnError: false
 
     input:
         tuple val(sample_id), path(vcf, stageAs: 'inputs/*')
@@ -47,7 +48,8 @@ process run_sort_BCFtools {
         pattern: "sorted.vcf.gz",
         mode: "copy",
         enabled: params.save_intermediate_files,
-        saveAs: { "BCFtools-sorted-${sample_id}.vcf.gz" }
+        saveAs: { "BCFtools-sorted-${sample_id}.vcf.gz" },
+        failOnError: false
 
     input:
         tuple val(sample_id), path(vcf, stageAs: 'inputs/*')

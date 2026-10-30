@@ -2,13 +2,14 @@ include { workflow_annotate_snvs } from './snv_annotations.nf'
 
 process run_liftover_BCFtools {
     container params.docker_image_bcftools
-    containerOptions "${params.platform_set}"
+    ext containerOptions: { "${params.platform_set}" }
 
     publishDir path: "${params.output_dir_base}/intermediate/${task.process.replace(':', '/')}",
         pattern: "{reject,liftover}.vcf.gz{,.tbi}",
         mode: "copy",
         enabled: params.save_intermediate_files,
-        saveAs: { filename -> "${sample_id}_LiftOver-${dest_fasta_id}_${filename}" }
+        saveAs: { filename -> "${sample_id}_LiftOver-${dest_fasta_id}_${filename}" },
+        failOnError: false
 
     input:
         tuple val(sample_id), path(vcf), path(index)
@@ -79,7 +80,7 @@ process split_vcf_for_feature_extraction {
 
 process extract_VCF_features_StableLift {
     container params.docker_image_stablelift
-    containerOptions "${params.container_mount_flag} ${moduleDir}:${moduleDir}"
+    ext containerOptions: "${params.container_mount_flag} ${moduleDir}:${moduleDir}"
 
     cpus { params.getOrDefault('extract_features_cpus', 4) }
 
@@ -87,7 +88,8 @@ process extract_VCF_features_StableLift {
         pattern: "features.Rds",
         mode: "copy",
         enabled: params.save_intermediate_files,
-        saveAs: { "StableLift-${sample_id}.Rds" }
+        saveAs: { "StableLift-${sample_id}.Rds" },
+        failOnError: false
 
     input:
     tuple val(sample_id), path(vcf_dir)
